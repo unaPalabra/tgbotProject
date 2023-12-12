@@ -1,22 +1,22 @@
 package com.alex.tgbotproject.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import com.alex.tgbotproject.dto.ValuteCursOnDate;
 import com.alex.tgbotproject.entity.ActiveChat;
 import com.alex.tgbotproject.repository.ActiveChatRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ScheduleService {
 
     private final ActiveChatRepository activeChatRepository;
@@ -41,7 +41,7 @@ public class ScheduleService {
                 previousRates.addAll(currentRates);
             }
         } catch (DatatypeConfigurationException e) {
-            e.printStackTrace();
+            log.error("Возникла проблема при получении данных от сервисов ЦБ РФ", e);
         }
     }
 }

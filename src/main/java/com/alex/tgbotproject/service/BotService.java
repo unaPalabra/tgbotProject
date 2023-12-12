@@ -13,9 +13,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import com.alex.tgbotproject.dto.ValuteCursOnDate;
-
-
-
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +86,7 @@ public class BotService extends TelegramLongPollingBot {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Возникла неизвестная проблема, сообщите пожалуйста администратору", e);
         }
     }
 
