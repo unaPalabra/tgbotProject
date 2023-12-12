@@ -31,11 +31,15 @@ public class CentralRussianBankService extends WebServiceTemplate {
         GetCursOnDateXmlResponse response = (GetCursOnDateXmlResponse) marshalSendAndReceive(cbrApiUrl, getCursOnDateXML);
 
         if (response == null) {
-            throw new IllegalStateException("Could not get response from CBR Service");
+            throw new IllegalStateException("Не удалось получить данные от ЦБ РФ");
         }
 
         final List<ValuteCursOnDate> courses = response.getGetCursOnDateXmlResult().getValuteData();
         courses.forEach(course -> course.setName(course.getName().trim()));
         return courses;
+    }
+
+    public ValuteCursOnDate getCourseForCurrency(String code) throws DatatypeConfigurationException {
+        return getCurrenciesFromCbr().stream().filter(currency -> code.equals(currency.getChCode())).findFirst().get();
     }
 }
