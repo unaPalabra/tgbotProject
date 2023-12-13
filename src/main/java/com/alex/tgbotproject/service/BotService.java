@@ -35,6 +35,7 @@ public class BotService extends TelegramLongPollingBot {
     private final ActiveChatRepository activeChatRepository;
 
     @Value("${bot.api.key}")
+
     private String apiKey;
 
     @Value("${bot.name}")
@@ -81,8 +82,6 @@ public class BotService extends TelegramLongPollingBot {
                 activeChat.setChatId(chatId);
                 activeChatRepository.save(activeChat);
             }
-
-            //Ниже очень примитивная обработка исключений, чуть позже мы это поправим
         } catch (TelegramApiException e) {
             e.printStackTrace();
         } catch (Exception e) {
