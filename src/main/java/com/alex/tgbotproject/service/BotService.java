@@ -1,12 +1,11 @@
 package com.alex.tgbotproject.service;
 
+import com.alex.tgbotproject.dto.ValuteCursOnDate;
 import com.alex.tgbotproject.entity.ActiveChat;
 import com.alex.tgbotproject.repository.ActiveChatRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -14,7 +13,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import com.alex.tgbotproject.dto.ValuteCursOnDate;
+
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
 
 
 @Service
@@ -68,11 +66,12 @@ public class BotService extends TelegramLongPollingBot {
                 for (ValuteCursOnDate valuteCursOnDate :
                         centralRussianBankService.getCurrenciesFromCbr()) {
 //В данной строчке мы собираем наше текстовое сообщение
-//StringUtils.defaultBlank – это метод из библиотеки Apache Commons, который нам нужен для того, чтобы на первой итерации нашего цикла была вставлена пустая строка вместо null, а на следующих итерациях не перетерся текст, полученный из предыдущих итерации. Подключение библиотеки см. ниже
-                    response.setText(StringUtils.defaultIfBlank(response.getText(), "Курс валют на дату ") + date + "\n"+
+//StringUtils.defaultBlank – это метод из библиотеки Apache Commons, который нам нужен для того, чтобы на первой итерации нашего цикла
+// была вставлена пустая строка вместо null, а на следующих итерациях не перетерся текст, полученный из предыдущих итерации.
+                    response.setText(StringUtils.defaultIfBlank(response.getText(), " Курс валют на дату " + date + "\n\n") +
                             valuteCursOnDate.getName() + " - " + valuteCursOnDate.getCourse() + "\n");
                 }
-            }else if (ADD_INCOME.equalsIgnoreCase(message.getText())) {
+            } else if (ADD_INCOME.equalsIgnoreCase(message.getText())) {
                 response.setText("Отправьте мне сумму полученного дохода");
             } else if (ADD_SPEND.equalsIgnoreCase(message.getText())) {
                 response.setText("Отправьте мне сумму расходов");

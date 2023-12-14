@@ -17,6 +17,4 @@ public class ActiveChat {
     @Column(name = "CHAT_ID")
     private Long chatId; //Уникальный идентификатор в системе Telegram
 
-    @Column(name = "CURRENT_DATE")
-    private String currentDate;
 }

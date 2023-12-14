@@ -4,11 +4,13 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "INCOMES")
 @Data
 public class Income {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +21,8 @@ public class Income {
 
     @Column(name = "INCOME")
     private BigDecimal income;
+
+    LocalDate date = LocalDate.now();
+    @Column(name = "DATE", insertable = false, updatable = false)
+    private String currentDate;
 }
