@@ -10,9 +10,13 @@ import javax.persistence.*;
 public class ActiveChat {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; //Уникальный идентификатор в системе нашего бота
+
 
     @Column(name = "CHAT_ID")
     private Long chatId; //Уникальный идентификатор в системе Telegram
+
+    @Column(name = "CURRENT_DATE")
+    private String currentDate;
 }
