@@ -22,7 +22,7 @@ public class Income {
     @Column(name = "INCOME")
     private BigDecimal income;
 
-    LocalDate date = LocalDate.now();
-    @Column(name = "DATE", insertable = false, updatable = false)
-    private String currentDate;
+
+    @Column(name = "DATE_ADD")
+    private     LocalDate date_add = LocalDate.now();
 }

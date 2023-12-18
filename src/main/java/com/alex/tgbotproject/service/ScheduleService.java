@@ -24,7 +24,7 @@ public class ScheduleService {
     private final CentralRussianBankService centralRussianBankService;
     private final List<ValuteCursOnDate> previousRates = new ArrayList<>();
 
-    @Scheduled(cron = "0 0 0/3 ? * *")
+    @Scheduled(cron = "0 0/5 * ? * *")
     public void notifyAboutChangesInCurrencyRate() {
         try {
             List<ValuteCursOnDate> currentRates = centralRussianBankService.getCurrenciesFromCbr();

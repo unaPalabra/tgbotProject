@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Data
 public class Spend {
 
-    LocalDate date = LocalDate.now();
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,6 @@ public class Spend {
     @Column(name = "SPEND")
     private BigDecimal spend;
 
-    @Column(name = "DATE", insertable = false, updatable = false)
-    private String currentDate;
+    @Column(name = "DATE_ADD")
+    private     LocalDate date_add = LocalDate.now();
 }
