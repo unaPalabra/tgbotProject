@@ -1,6 +1,5 @@
 package com.alex.tgbotproject.repository;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -30,7 +29,8 @@ public class StatsRepository {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("amount",amount);
 
-        return namedParameterJdbcTemplate.queryForObject("SELECT count(*) FROM INCOMES WHERE INCOME > :amount", parameters, new StatsRowWrapper());
+        return namedParameterJdbcTemplate.
+                queryForObject("SELECT count(*) FROM INCOMES WHERE INCOME > :amount", parameters, new StatsRowWrapper());
     }
 
     private static final class StatsRowWrapper implements RowMapper<Integer>{

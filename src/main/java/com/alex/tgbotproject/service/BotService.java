@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -38,7 +37,6 @@ public class BotService extends TelegramLongPollingBot {
     private final ActiveChatRepository activeChatRepository;
 
     @Value("${bot.api.key}")
-
     private String apiKey;
 
     @Value("${bot.name}")

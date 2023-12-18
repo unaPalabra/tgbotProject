@@ -5,6 +5,7 @@ import com.alex.tgbotproject.entity.ActiveChat;
 import com.alex.tgbotproject.repository.ActiveChatRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 
 @Component
 @RequiredArgsConstructor
