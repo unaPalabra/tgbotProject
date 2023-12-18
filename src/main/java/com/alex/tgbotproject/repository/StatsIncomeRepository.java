@@ -17,7 +17,7 @@ public class StatsIncomeRepository {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public long getAllSumIncomUser (BigDecimal userId){
+    public long getAllSumIncomeUser(BigDecimal userId){
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("userID",userId);
 

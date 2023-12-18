@@ -12,6 +12,6 @@ public class SumIncomeUserService {
     private final StatsIncomeRepository statsIncomeRepository;
 
     public long getSumIncomeUser (BigDecimal chatId){
-        return statsIncomeRepository.getAllSumIncomUser(chatId);
+        return statsIncomeRepository.getAllSumIncomeUser(chatId);
     }
 }
