@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class SumIncomeUserService {
     private final StatsIncomeRepository statsIncomeRepository;
 
-    public long getSumIncomeUser (BigDecimal chatId){
+    public long getSumIncomeUser (Long chatId){
         return statsIncomeRepository.getAllSumIncomeUser(chatId);
     }
 }

@@ -25,7 +25,7 @@ public class StatisticController {
 
     @GetMapping("/getSumIncome")
     @ApiOperation(value = "Получение суммы дохода определенного пользователя")
-    public long getSumtIncome (@RequestParam(value = "userId") BigDecimal userId){
+    public long getSumtIncome (@RequestParam(value = "userId") Long userId){
         return sumIncomeUserService.getSumIncomeUser(userId);
     }
 }
