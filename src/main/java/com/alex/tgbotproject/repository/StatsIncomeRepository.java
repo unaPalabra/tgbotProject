@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -22,7 +21,7 @@ public class StatsIncomeRepository {
         parameters.put("userID",userId);
 
     return namedParameterJdbcTemplate.
-            queryForObject("SELECT SUM (income) FROM INCOMES WHERE CHAT_ID='userId'", parameters, new SumIncomeWrapper());
+            queryForObject("SELECT SUM (income) FROM INCOMES WHERE CHAT_ID= :userID",  parameters, new SumIncomeWrapper());
 }
 
     private static final class SumIncomeWrapper implements RowMapper<Integer> {
