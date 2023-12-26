@@ -30,8 +30,8 @@ public class Income {
     private BigDecimal income;
 
 
-    @Column(name = "DATE_ADD")
-    private     LocalDate date_add = LocalDate.now();
+    @Column(name = "DATE_ADD" )
+    private  LocalDate date_add = LocalDate.now();
 
 
     @Override
