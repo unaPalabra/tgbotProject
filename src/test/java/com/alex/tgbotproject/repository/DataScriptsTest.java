@@ -24,13 +24,13 @@ public class DataScriptsTest {
     public void  testData_tableIncome(){
         Optional<Income> income = incomeRepository.findById(144L);
         assertTrue(income.isPresent());
-        assertEquals(new BigDecimal(1500L),income.get().getIncome());
+        assertEquals(new BigDecimal(1500),income.get().getIncome());
     }
 
     @Test
     public void  testData_tableSpend(){
         Optional<Spend> spend = spendRepository.findById(501L);
         assertTrue(spend.isPresent());
-        assertEquals(new BigDecimal(1200L),spend.get().getSpend());
+        assertEquals(new BigDecimal(1200),spend.get().getSpend());
     }
 }
