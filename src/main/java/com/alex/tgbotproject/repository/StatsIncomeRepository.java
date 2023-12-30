@@ -21,7 +21,7 @@ public class StatsIncomeRepository {
         parameters.put("userID",userId);
 
     return namedParameterJdbcTemplate.
-            queryForObject("SELECT SUM (income) FROM INCOMES WHERE CHAT_ID= :userID",  parameters, new SumIncomeWrapper());
+            queryForObject("SELECT SUM (income) FROM INCOME WHERE CHAT_ID= :userID",  parameters, new SumIncomeWrapper());
 }
 
     private static final class SumIncomeWrapper implements RowMapper<Integer> {

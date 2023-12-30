@@ -16,11 +16,17 @@ class ActiveChatRepositoryTest {
 
     @Test
     public void testRepo_found() {
+        // создаЄм экземпл€р
         final ActiveChat activeChat = new ActiveChat();
+        // заполн€ем атрибут каким-нибудь значением
         activeChat.setChatId(12345L);
+        // сохран€ем объект в базу
         activeChatRepository.save(activeChat);
+        // ищем объект кастомным методом по chatId
         Optional<ActiveChat> activeChatByChatId = activeChatRepository.findActiveChatByChatId(12345L);
+        // провер€ем, что объект найден
         assertTrue(activeChatByChatId.isPresent());
+        // и что он имеет нужное значение
         assertEquals(12345L, activeChatByChatId.get().getChatId());
     }
 
@@ -30,6 +36,7 @@ class ActiveChatRepositoryTest {
         activeChat.setChatId(12345L);
         activeChatRepository.save(activeChat);
         Optional<ActiveChat> activeChatByChatId = activeChatRepository.findActiveChatByChatId(54321L);
+        // мы искали несуществующий объект, поэтому провер€ем, что он не нашЄлс€
         assertFalse(activeChatByChatId.isPresent());
     }
 }

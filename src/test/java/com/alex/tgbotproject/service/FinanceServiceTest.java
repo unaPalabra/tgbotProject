@@ -28,7 +28,7 @@ class FinanceServiceTest {
     private SpendRepository spendRepository;
 
     // указываем, что этот класс надо имитировать (он используется в FinanceService)
-    @Mock
+     @Mock
     private IncomeRepository incomeRepository;
 
     // запишем время, когда начался каждый тест

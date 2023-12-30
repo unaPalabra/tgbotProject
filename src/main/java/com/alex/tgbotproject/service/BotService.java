@@ -31,10 +31,16 @@ public class BotService extends TelegramLongPollingBot {
     private static final String ADD_INCOME = "/addincome";
     private static final String ADD_SPEND = "/addspend";
 
+    private static final String GET_SUM_INCOME = "/getsumincom";
+    private static final String GET_SUM_SPEND = "/getsumspend";
+
 
     private final CentralRussianBankService centralRussianBankService;
     private final FinanceService financeService;
     private final ActiveChatRepository activeChatRepository;
+
+    private final SumIncomeUserService sumIncomeUserService;
+
 
     @Value("${bot.api.key}")
     private String apiKey;
@@ -49,6 +55,7 @@ public class BotService extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();//Этой строчкой мы получаем сообщение от пользователя
+
         try {
             SendMessage response = new SendMessage();//Данный класс представляет собой реализацию команды отправки сообщения,
             //которую за нас выполнит ранее подключенная библиотека
@@ -60,12 +67,12 @@ public class BotService extends TelegramLongPollingBot {
 
             //Тут начинается самое интересное - мы сравниваем, что прислал пользователь, и какие команды мы можем обработать.
             if (CURRENT_RATES.equalsIgnoreCase(message.getText())) {
-//Получаем все курсы валют на текущий момент и проходимся по ним в цикле
+            //Получаем все курсы валют на текущий момент и проходимся по ним в цикле
                 for (ValuteCursOnDate valuteCursOnDate :
                         centralRussianBankService.getCurrenciesFromCbr()) {
-//В данной строчке мы собираем наше текстовое сообщение
-//StringUtils.defaultBlank – это метод из библиотеки Apache Commons, который нам нужен для того, чтобы на первой итерации нашего цикла
-// была вставлена пустая строка вместо null, а на следующих итерациях не перетерся текст, полученный из предыдущих итерации.
+            //В данной строчке мы собираем наше текстовое сообщение
+            //StringUtils.defaultBlank – это метод из библиотеки Apache Commons, который нам нужен для того, чтобы на первой итерации нашего цикла
+            // была вставлена пустая строка вместо null, а на следующих итерациях не перетерся текст, полученный из предыдущих итерации.
                     response.setText(StringUtils.defaultIfBlank(response.getText(), " Курс валют на дату " + date + "\n\n") +
                             valuteCursOnDate.getName() + " - " + valuteCursOnDate.getCourse() + "\n");
                 }
@@ -73,7 +80,12 @@ public class BotService extends TelegramLongPollingBot {
                 response.setText("Отправьте мне сумму полученного дохода");
             } else if (ADD_SPEND.equalsIgnoreCase(message.getText())) {
                 response.setText("Отправьте мне сумму расходов");
-            } else {
+            }  else if (GET_SUM_INCOME.equalsIgnoreCase(message.getText())) {
+                response.setText(StringUtils.defaultIfBlank(response.getText(), "Ваша общая сумма дохода: " + sumIncomeUserService.getSumIncomeUser( chatId)));
+            }else if (GET_SUM_SPEND.equalsIgnoreCase(message.getText())) {
+                response.setText(StringUtils.defaultIfBlank(response.getText(), "Ваша общая сумма дохода: " ));
+            }
+            else {
                 response.setText(financeService.addFinanceOperation(getPreviousCommand(message.getChatId()), message.getText(), message.getChatId()));
             }
 

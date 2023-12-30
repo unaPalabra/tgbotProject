@@ -15,12 +15,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class ScheduleService {
-
     private final ActiveChatRepository activeChatRepository;
     private final BotService botService;
     private final CentralRussianBankService centralRussianBankService;
