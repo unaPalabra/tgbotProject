@@ -40,6 +40,7 @@ public class BotService extends TelegramLongPollingBot {
     private final ActiveChatRepository activeChatRepository;
 
     private final SumIncomeUserService sumIncomeUserService;
+    private final SumSpendUserService sumSpendUserService;
 
 
     @Value("${bot.api.key}")
@@ -83,7 +84,7 @@ public class BotService extends TelegramLongPollingBot {
             }  else if (GET_SUM_INCOME.equalsIgnoreCase(message.getText())) {
                 response.setText(StringUtils.defaultIfBlank(response.getText(), "Ваша общая сумма дохода: " + sumIncomeUserService.getSumIncomeUser( chatId)));
             }else if (GET_SUM_SPEND.equalsIgnoreCase(message.getText())) {
-                response.setText(StringUtils.defaultIfBlank(response.getText(), "Ваша общая сумма дохода: " ));
+                response.setText(StringUtils.defaultIfBlank(response.getText(), "Ваша общая сумма расходов: " + sumSpendUserService.getSumSpendUser(chatId)));
             }
             else {
                 response.setText(financeService.addFinanceOperation(getPreviousCommand(message.getChatId()), message.getText(), message.getChatId()));
